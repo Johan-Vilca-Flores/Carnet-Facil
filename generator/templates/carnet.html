@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Carnet del Estudiante</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f1f1f1;
+            text-align: center;
+            margin-top: 50px;
+        }
+        .carnet {
+            width: 350px;
+            margin: 0 auto;
+            padding: 20px;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.2);
+        }
+        img {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+        h2 { margin-bottom: 10px; }
+        p { margin: 4px 0; }
+    </style>
+</head>
+<body>
+    <div class="carnet">
+        <img src="{{ estudiante.foto.url }}" alt="Foto del estudiante">
+        <h2>{{ estudiante.nombre }}</h2>
+        <p><b>DNI:</b> {{ estudiante.dni }}</p>
+        <p><b>Grado:</b> {{ estudiante.grado }}</p>
+        <p><b>Sección:</b> {{ estudiante.seccion }}</p>
+    </div>
+</body>
+</html>

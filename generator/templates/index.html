@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Generador de Carnets</title>
+</head>
+<body>
+    <h1>Generador de Carnets de Estudiantes</h1>
+
+    <form method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Guardar estudiante</button>
+    </form>
+
+    <h2>Lista de Estudiantes</h2>
+    <ul>
+        {% for e in estudiantes %}
+            <li>{{ e.nombre }} - {{ e.dni }} - {{ e.grado }}</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

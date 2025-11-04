@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Lista de Estudiantes</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f6fa;
+            margin: 40px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #003366;
+        }
+
+        a {
+            text-decoration: none;
+            color: #0066cc;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        .container {
+            max-width: 700px;
+            margin: auto;
+            background: #fff;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+        }
+
+        th, td {
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
+            text-align: left;
+        }
+
+        th {
+            background-color: #e0eaff;
+            color: #003366;
+        }
+
+        .actions a {
+            margin-right: 10px;
+            background: #4CAF50;
+            color: white;
+            padding: 6px 10px;
+            border-radius: 4px;
+            font-size: 13px;
+        }
+
+        .actions a.pdf {
+            background: #2196F3;
+        }
+
+        .actions a:hover {
+            opacity: 0.8;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Lista de Estudiantes</h1>
+        <p><a href="{% url 'carnets_pdf_todos' %}" target="_blank">📄 Generar PDF con todos los carnets</a></p>
+
+
+        <p><a href="{% url 'add_student' %}">➕ Agregar nuevo estudiante</a></p>
+
+        {% if estudiantes %}
+            <table>
+                <tr>
+                    <th>Nombre</th>
+                    <th>DNI</th>
+                    <th>Carrera</th>
+                    <th>Acciones</th>
+                </tr>
+                {% for estudiante in estudiantes %}
+                <tr>
+                    <td>{{ estudiante.nombre }}</td>
+                    <td>{{ estudiante.dni }}</td>
+                    <td>{{ estudiante.carrera|default:"—" }}</td>
+                    <td class="actions">
+                        <a href="{% url 'generar_carnet' estudiante.id %}">🪪 Ver Carnet</a>
+                        <a href="{% url 'carnet_pdf' estudiante.id %}" target="_blank" class="pdf">📄 PDF</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </table>
+        {% else %}
+            <p>No hay estudiantes registrados.</p>
+        {% endif %}
+    </div>
+</body>
+</html>
