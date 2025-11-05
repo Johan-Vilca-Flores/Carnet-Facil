@@ -159,6 +159,17 @@ def carnet_pdf(request, estudiante_id):
 
     # Finalizar PDF
     p.showPage()
+    # Fondo para cara posterior
+    fondo_posterior_path = os.path.join(settings.BASE_DIR, "generator/static/img/fondo_posterior.jpg")
+    if os.path.exists(fondo_posterior_path):
+        p.drawImage(fondo_posterior_path, 80, height - 481, width=282, height=481, mask='auto')
+        # Agregar contenido de la cara posterior
+    p.setFont("Helvetica-Bold", 12)
+    p.drawString(100, height - 200, f"Teléfono: {estudiante.telefono}")
+    p.drawString(100, height - 220, f"Tel. Apoderado: {estudiante.telefono_apoderado}")
+    p.drawString(100, height - 240, f"Dirección: {estudiante.direccion}")
+    p.drawString(100, height - 260, f"Inicio: {estudiante.fecha_inicio}")
+    p.drawString(100, height - 280, f"Día de Pago: {estudiante.dia_pago}")
     p.save()
 
     return response
